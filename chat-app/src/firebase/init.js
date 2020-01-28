@@ -19,3 +19,4 @@ import firestore from 'firebase/firestore';
   firebaseApp.firestore().settings({ timestampsInSnapshots: true});
 
   export default firebaseApp.firestore()
+
