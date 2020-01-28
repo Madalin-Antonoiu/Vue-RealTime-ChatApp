@@ -10,7 +10,8 @@ export default {
   props: ['name', 'room'],
   data(){
     return {
-      name: "name"
+      name: "name",
+      room: "room"
     }
   }
 }
