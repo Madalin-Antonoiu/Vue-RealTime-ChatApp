@@ -7,14 +7,14 @@
 
         <div class="input-field">
           <i class="material-icons prefix">assistant</i>
-          <input id="room" name="room" type="text"  class="validate" v-model="room" :class="{ 'invalid': attemptSubmit && missingRoom, 'valid': !missingRoom }">
+          <input id="room" name="room" type="text"  class="validate" v-model="room" :class="{ 'invalid': attemptSubmit && missingRoom, 'valid': !missingRoom }" autocomplete="off">
           <label for="room">Room Name</label>
           <span  class="helper-text" data-error="You must enter room name to join." data-success="Correct"></span> <!-- Not writting anything inside for a helper -->
         </div>
 
         <div class="input-field">
           <i class="material-icons prefix">account_circle</i>
-          <input id="name" name="name" type="text"  class="validate" v-model="name" :class="{ 'invalid': attemptSubmit && missingName , 'valid': !missingName }">
+          <input id="name" name="name" type="text"  class="validate" v-model="name" :class="{ 'invalid': attemptSubmit && missingName , 'valid': !missingName }" autocomplete="off">
           <label for="name">Your Name</label>
           <span class="helper-text" data-error="You must enter your name to join." data-success="Correct"></span>
         </div>
