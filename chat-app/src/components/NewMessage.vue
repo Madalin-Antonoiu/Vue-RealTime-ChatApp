@@ -6,19 +6,15 @@
       <input type="text" class="msger-input" placeholder="Enter your message..."  autofocus autocomplete="off" v-model="newMessage">
       <button type="submit" class="msger-send-btn">Send</button> <br>
 
-
-      <!-- <p class="red-text" v-if="feedback"> {{ feedback }}</p> -->
-
     </form>
-
-     <div class="Emojiesss">
+      <p class="red-text center-align" v-if="feedback"> {{ feedback }}</p>
         <VEmojiPicker
           v-show="showDialog"
           labelSearch="Search"
           style="{ width: 4px }"
           @select="onSelectEmoji"
         />
-      </div>
+
     </div>
   </div>
 </template>
@@ -36,7 +32,7 @@ export default {
     },
     data(){
         return {
-            newMessage: null,
+            newMessage: "",
             feedback: null,
             showDialog: false
         }
@@ -62,7 +58,11 @@ export default {
           //console.log(this.name, this.newMessage, Date.now())
       },
       toogleDialogEmoji() {
+
         this.showDialog = !this.showDialog;
+        //console.log( window + "/"+ document.body.scrollHeight)
+        //window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight);
+
       },
       onSelectEmoji(emoji) {
         this.newMessage += emoji.data;
