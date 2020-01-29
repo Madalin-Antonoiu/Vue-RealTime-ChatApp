@@ -2,7 +2,7 @@
   <div >
     <form class="msger-inputarea" @submit.prevent="addMessage()">
 
-     <button @click="toogleDialogEmoji">😃</button>
+     <button @click.prevent="toogleDialogEmoji">😃</button>
       <input type="text" class="msger-input" placeholder="Enter your message..."  autofocus autocomplete="off" v-model="newMessage">
       <button type="submit" class="msger-send-btn">Send</button> <br>
 
@@ -10,8 +10,8 @@
       <!-- <p class="red-text" v-if="feedback"> {{ feedback }}</p> -->
 
     </form>
-        <div id="exampleInputEmoji">
-     <div class="your-input-box">
+
+     <div class="Emojiesss">
         <VEmojiPicker
           v-show="showDialog"
           labelSearch="Search"
@@ -77,24 +77,18 @@ export default {
     /*Cpen*/
 
  #EmojiPicker{
- height:150px;
- width: 100%;
-}
+   padding: 10px; /*Mirroring the above component*/
+  min-width: 100%;
+  }
+
 
 .grid-emojis{
   grid-template-columns: repeat(10, 10%) !important;
 }
 
-#exampleInputEmoji {
-  position: relative;
-  display:block;
-}
 
-.your-input-box {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+
+
 
 input {
   padding: 8px;

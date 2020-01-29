@@ -224,11 +224,13 @@ export default {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-image: var(--body-bg);
+
     font-family: Helvetica, sans-serif;
   }
 
   .msger {
+    /*margin-bottom:50px;*/
+    min-height: 400px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -242,6 +244,7 @@ export default {
     border: var(--border);
     border-radius: 5px;
     box-shadow: 0 15px 15px -5px rgba(0, 0, 0, 0.2);
+
   }
 
   .msger-header {
@@ -332,13 +335,15 @@ export default {
   }
 
 #footer{
-  background-color: #212121;
-  position: fixed;
-  bottom: 0px;
-  left: 0px;
-  line-height: 30px;
-  color: #aaa;
-  text-align: center;
-  width: 100%;
+background-color: #212121;
+    color: #aaa;
+    text-align: center;
+    width: 100%;
+    /* margin-top: 50px; */
+    /* padding-top: 50px;
+        /* position: fixed; */
+    /* bottom: 0px; */
+    /* left: 0px; */
+    /* line-height: 30px; */
 }
 </style>
