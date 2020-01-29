@@ -1,74 +1,57 @@
 <template>
 
-    <div>
-
-
   <section class="msger">
+    <header class="msger-header">
+
+      <div class="msger-header-title">
+        <span>
+
+          <i @click="$router.go()" class="material-icons blue-text" style="vertical-align: -6px; cursor: pointer;">chevron_left</i>
 
 
-  <header class="msger-header">
+          <i class="material-icons" style="vertical-align: -6px; ">chat</i>
+          <span>{{room}}</span>
+        </span>
 
-    <div class="msger-header-title">
-       <span>
-
-        <i @click="$router.go()" class="material-icons blue-text" style="vertical-align: -6px; cursor: pointer;">chevron_left</i>
-
-
-        <i class="material-icons" style="vertical-align: -6px; ">chat</i>
-        <span>{{room}}</span>
-      </span>
-
-    </div>
-
-    <div class="msger-header-options">
-      <span> <i class="material-icons">settings</i></span>
-    </div>
-  </header>
-
-  <main class="msger-chat" v-chat-scroll>
-    <ul class="messages">
-
-
-    <li  v-for="message in messages" :key="message.id" :class="{'msg right-msg': name === message.name, 'msg left-msg': name !== message.name}">
-
-              <!-- <span  v-if='name !== message.name' class="teal-text">{{ message.name }}</span>
-              <span class="grey-text text-darken-3">{{ message.content }}</span>
-              <span  class="grey-text time">{{ message.timestamp + " " + message.room}}</span> -->
-
-      <div class="msg-img"
-        :style='[ name !== message.name ?  {backgroundImage: "url(" + "https://image.flaticon.com/icons/svg/547/547420.svg" + ")"} : {backgroundImage: "url(" + "https://image.flaticon.com/icons/svg/1596/1596810.svg" + ")"} ]'></div>
-
-      <div class="msg-bubble">
-        <div class="msg-info">
-          <div class="msg-info-name">{{ message.name }}</div>
-          <div class="msg-info-time">{{ message.timestamp}}</div>
-        </div>
-
-        <div class="msg-text">{{ message.content }}</div>
       </div>
 
-    </li>
+      <div class="msger-header-options">
+        <span> <i class="material-icons">settings</i></span>
+      </div>
+    </header>
 
-  </ul>
+    <main class="msger-chat" v-chat-scroll>
+      <ul class="messages">
+        <li  v-for="message in messages" :key="message.id" :class="{'msg right-msg': name === message.name, 'msg left-msg': name !== message.name}">
 
-  </main>
+                <!-- <span  v-if='name !== message.name' class="teal-text">{{ message.name }}</span>
+                <span class="grey-text text-darken-3">{{ message.content }}</span>
+                <span  class="grey-text time">{{ message.timestamp + " " + message.room}}</span> -->
 
+          <div class="msg-img"
+            :style='[ name !== message.name ?  {backgroundImage: "url(" + "https://image.flaticon.com/icons/svg/547/547420.svg" + ")"} : {backgroundImage: "url(" + "https://image.flaticon.com/icons/svg/1596/1596810.svg" + ")"} ]'></div>
 
- <NewMessage :name="name" :room="room" />
+          <div class="msg-bubble">
+            <div class="msg-info">
+              <div class="msg-info-name">{{ message.name }}</div>
+              <div class="msg-info-time">{{ message.timestamp}}</div>
+            </div>
 
-</section>
+            <div class="msg-text">{{ message.content }}</div>
+          </div>
 
-<footer id="footer">
+        </li>
+      </ul>
+    </main>
 
-  <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+    <NewMessage :name="name" :room="room" />
 
-</footer>
+    <footer id="footer">
+      <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+    </footer>
 
-</div>
+  </section>
 
-      <!-- <span v-if="name === message.name">ok</span> Will output ok next to every message that has name == user input name -->
-      <!-- :class="{saved: name === message.name }" on LI to style magic things!-->
-       <!-- <span v-if='name !== message.name' will not show your name if it`s current user-->
 </template>
 
 <script>

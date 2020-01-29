@@ -1,5 +1,6 @@
 <template>
   <div >
+
     <form class="msger-inputarea" @submit.prevent="addMessage()">
 
      <button @click.prevent="toogleDialogEmoji">😃</button>
@@ -60,10 +61,14 @@ export default {
       toogleDialogEmoji() {
 
         this.showDialog = !this.showDialog;
-        //console.log( window + "/"+ document.body.scrollHeight)
-        //window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight);
+
+        //You need to give it some delay so the DOM recognizes that you enlarged it, that`s why setTimeout
+        setTimeout(function() {  window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight) }, 100); // scroll to bot ;)
+
 
       },
+
+
       onSelectEmoji(emoji) {
         this.newMessage += emoji.data;
         // Optional
