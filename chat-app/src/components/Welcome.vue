@@ -72,9 +72,9 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
  .welcome {
-    width: 400px;
+    width: 100%;
     max-width: 400px;
-    margin-top: 100px;
+    margin-top: 50px;
  }
  .welcome h2 {
   font-size: 3em;

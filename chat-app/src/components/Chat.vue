@@ -123,8 +123,14 @@ export default {
 
 <style>
 
+  .card{
+      max-width: 450px;
+    margin: 0 auto;
+  }
+
   .card .card-content{
     padding: 12px;
+
   }
 
 
@@ -148,7 +154,7 @@ export default {
 
   .messages {
     padding: 3px;
-    max-height: 400px;
+    /*max-height: 400px;*/
   }
 
   .messages, .messages-box:hover, .messages-box:focus {
@@ -223,16 +229,18 @@ export default {
   }
 
   .msger {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-flow: column wrap;
     flex-flow: column wrap;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
     justify-content: space-between;
-    width: 100%;
-    max-width: 867px;
-    margin: 25px 10px;
-    height: calc(100% - 50px);
     border: var(--border);
     border-radius: 5px;
-    background: var(--msger-bg);
     box-shadow: 0 15px 15px -5px rgba(0, 0, 0, 0.2);
   }
 
@@ -246,11 +254,9 @@ export default {
   }
 
   .msger-chat {
-
     overflow-y: auto;
     padding: 10px;
-    min-width: 600px;
-    height:500px;
+    max-height: 75vh;
   }
   .msger-chat::-webkit-scrollbar {
     width: 6px;
@@ -327,11 +333,10 @@ export default {
 
 #footer{
   background-color: #212121;
-  height: 60px;
   position: fixed;
   bottom: 0px;
   left: 0px;
-  line-height: 50px;
+  line-height: 30px;
   color: #aaa;
   text-align: center;
   width: 100%;
