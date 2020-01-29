@@ -213,7 +213,7 @@ export default {
 
   .msger {
     /*margin-bottom:50px;*/
-    min-height: 400px;
+    /* min-height: 400px; */
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -224,9 +224,10 @@ export default {
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
     justify-content: space-between;
-    border: var(--border);
-    border-radius: 5px;
+    /* border: var(--border); */
+    /* border-radius: 5px; */
     box-shadow: 0 15px 15px -5px rgba(0, 0, 0, 0.2);
+    height: 100vh;
 
   }
 
