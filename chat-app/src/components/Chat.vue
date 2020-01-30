@@ -29,26 +29,6 @@
       ChatMessages,
       NewMessage,
     },
-    methods: {
-      saveCanvas(){
-        let el = document.querySelector("#capture");
-        html2canvas(el, { allowTaint : true, scale: 2, logging : false, }).then (
-         
-          canvas => {
-            document.body.appendChild(canvas)
-          
-            // g.classList.add('canvas')
-            //document.getElementById.('modal1')
-          // below here to resize canvas
-          }
-        )
-     
-     
-
- 
-      },
-
-    },
 }
 
 </script>

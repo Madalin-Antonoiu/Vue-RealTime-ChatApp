@@ -56,7 +56,7 @@ import domtoimage from 'dom-to-image-more';
     },
     methods:{
       clearChat(){
-          const myNode = document.getElementById("cm");
+          const myNode = document.getElementById("capture");
           while (myNode.firstChild) {
             myNode.removeChild(myNode.firstChild);
           }
@@ -70,10 +70,22 @@ import domtoimage from 'dom-to-image-more';
                 img.src = dataUrl;
                 img.classList.add("historyImg");
                 document.body.appendChild(img);
+
             })
             .catch(function (error) {
                 console.error('oops, something went wrong!', error);
             });
+
+                      const records = document.querySelectorAll('.historyImg')
+          
+          records .forEach(record => {
+
+            record.addEventListener('click', event => {
+                  //console.log( event.target.id );
+                        event.target.style.display="none"
+            });
+
+          }); // Must change, not perfect
           },
       domigifyDownload(){
         domtoimage.toJpeg(document.getElementById('capture'), { quality: 0.95 }).then(function (dataUrl) {
@@ -100,7 +112,10 @@ import domtoimage from 'dom-to-image-more';
     right: 0;
     top: 0;
     z-index: 9999;
-    height: 100vh;
+    max-height: 100vh;
+    max-width: 400px;
+    outline: 1px rgb(184, 90, 90) dashed;
+    outline-offset: -1px;
   }
    .historyImg:nth-of-type(2){
     right:80px;

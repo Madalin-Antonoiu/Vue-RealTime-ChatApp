@@ -43,7 +43,7 @@ export default {
     methods: {
       addMessage(){
           //It should also open a modal and show your options
-          let script = this.newMessage.includes("/s") || this.newMessage.includes("/y") || this.newMessage.includes('/ss') ; //Split this up in 3 for different functions :) yay
+          let script = this.newMessage.includes("/s") || this.newMessage.includes("/y") || this.newMessage.includes('/c') ; //Split this up in 3 for different functions :) yay
           let empty = this.newMessage=="" || this.newMessage== null;
 
           if (!script && !empty){ // If not script and not empty, push a new message
@@ -59,18 +59,25 @@ export default {
                 })
                 this.newMessage = null // clears input
                 this.feedback = null // clears error
-          } else if(script && !this.newMessage.includes("/y")) { // ? script && doesn't include /y
+          } else if(script && !this.newMessage.includes("/y") && !this.newMessage.includes("/c")) { // ? script && doesn't include /y
               let typed = this.newMessage.replace('/s',''); //Removes the /s from input for the Google search
               window.open('https://google.com/search?q='+ typed )
               this.newMessage = ""
-          } else if (script && this.newMessage.includes("/y")){
+          } else if (script && this.newMessage.includes("/y") && !this.newMessage.includes("/s") && !this.newMessage.includes("/c")){
                let typed = this.newMessage.replace('/y','');
-               window.open('https:///youtube.com/results?search_query='+ typed )
+               window.open('https://youtube.com/results?search_query='+ typed )
                this.newMessage = ""
+          } else if (script && this.newMessage.includes("/c")){
+            //clear chat
+            const myNode = document.getElementById("capture");
+            while (myNode.firstChild) {
+             myNode.removeChild(myNode.firstChild);
+            } 
+            this.newMessage = ""
           } else if (empty) {
+             //And won't send because its doubled-up up
               this.feedback = "You must enter a message in order to send one."
-              //And won't send because its doubled-up up
-          } else {
+          }  else {
               preventDefault();
           }
           //console.log(this.name, this.newMessage, Date.now())
