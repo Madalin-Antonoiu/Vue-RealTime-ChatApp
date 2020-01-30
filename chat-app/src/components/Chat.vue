@@ -1,10 +1,11 @@
 <template>
 
-  <div class="chat">
+  <div class="chat" >
 
     <ChatHeader :name="name" :room="room"  />
     <ChatMessages :name="name" /> <!-- No longer need to pass room-->
     <NewMessage :name="name" :room="room" />
+    <button class="button btn" @click="saveCanvas()"> Take SS </button>
 
     <footer id="footer">
       <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
@@ -27,12 +28,36 @@
       ChatMessages,
       NewMessage,
     },
-  }
+    methods: {
+      saveCanvas(){
+        let el = document.querySelector("#capture");
+        html2canvas(el, { allowTaint : true, scale: 2, logging : false, }).then (
+         
+          canvas => {
+            document.body.appendChild(canvas)
+          
+            // g.classList.add('canvas')
+            //document.getElementById.('modal1')
+          // below here to resize canvas
+          }
+        )
+     
+     
+
+ 
+      },
+
+      },
+}
+
 </script>
 
 
 <style>
 
+  .canvas {
+    position:relative;
+  }
   .chat {
     display: -webkit-box;
     display: -ms-flexbox;
