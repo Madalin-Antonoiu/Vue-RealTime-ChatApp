@@ -1,6 +1,6 @@
 <template>
   <div class="new-message-area">
-
+ <p class="red-text center-align" v-if="feedback"> {{ feedback }}</p>
     <form class="msger-inputarea" @submit.prevent="addMessage()">
 
     <button  class="btn button">G</button>
@@ -10,7 +10,7 @@
       <button type="submit" class="chat-send-btn">Send</button> <br>
 
     </form>
-      <p class="red-text center-align" v-if="feedback"> {{ feedback }}</p>
+     
         <VEmojiPicker
           v-show="showDialog"
           labelSearch="Search"
@@ -43,10 +43,10 @@ export default {
     methods: {
       addMessage(){
           //It should also open a modal and show your options
-          let script = this.newMessage.includes("/s") || this.newMessage.includes("/b") || this.newMessage.includes('/c'); //Split this up in 3 for different functions :) yay
-      
+          let script = this.newMessage.includes("/s") || this.newMessage.includes("/y") || this.newMessage.includes('/b') ; //Split this up in 3 for different functions :) yay
+          let empty = this.newMessage=="" || this.newMessage== null;
 
-          if (!script){
+          if (!script && !empty){
                 db.collection('messages').add({
                     content: this.newMessage,
                     name: this.name,
@@ -57,13 +57,16 @@ export default {
                 }).catch( err =>{
                     console.log(err)
                 })
-                this.newMessage = null // resetting field
-                this.feedback = null
+                this.newMessage = null // clears input
+                this.feedback = null // clears error
           } else if(script) {
               let typed = this.newMessage.replace('/s',''); //Removes the /s from input for the Google search
               window.open('http://google.com/search?q='+ typed )
-          } else {
+              this.newMessage = ""
+          } else if (empty) {
               this.feedback = "You must enter a message in order to send one."
+          } else {
+              preventDefault();
           }
           //console.log(this.name, this.newMessage, Date.now())
       },
