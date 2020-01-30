@@ -66,6 +66,7 @@ export default {
           } else if (script && this.newMessage.includes("/y")){
                let typed = this.newMessage.replace('/y','');
                window.open('https:///youtube.com/results?search_query='+ typed )
+               this.newMessage = ""
           } else if (empty) {
               this.feedback = "You must enter a message in order to send one."
               //And won't send because its doubled-up up
