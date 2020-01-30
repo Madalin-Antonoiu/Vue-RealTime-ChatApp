@@ -3,8 +3,10 @@
 
     <form class="msger-inputarea" @submit.prevent="addMessage()">
 
+    <button  class="btn button">G</button>
+
      <button @click.prevent="toogleDialogEmoji">😃</button>
-      <input type="text" class="msger-input" placeholder="Enter your message..."  autofocus autocomplete="off" v-model="newMessage">
+      <input  type="text" class="msger-input" placeholder="Enter your message..."  autofocus autocomplete="off" v-model="newMessage">
       <button type="submit" class="chat-send-btn">Send</button> <br>
 
     </form>
@@ -17,7 +19,7 @@
         />
 
     </div>
-  </div>
+  
 </template>
 
 <script>
@@ -40,7 +42,11 @@ export default {
     },
     methods: {
       addMessage(){
-          if (this.newMessage){
+          //It should also open a modal and show your options
+          let script = this.newMessage.includes("/s") || this.newMessage.includes("/b") || this.newMessage.includes('/c'); //Split this up in 3 for different functions :) yay
+      
+
+          if (!script){
                 db.collection('messages').add({
                     content: this.newMessage,
                     name: this.name,
@@ -53,6 +59,9 @@ export default {
                 })
                 this.newMessage = null // resetting field
                 this.feedback = null
+          } else if(script) {
+              let typed = this.newMessage.replace('/s',''); //Removes the /s from input for the Google search
+              window.open('http://google.com/search?q='+ typed )
           } else {
               this.feedback = "You must enter a message in order to send one."
           }
@@ -67,12 +76,14 @@ export default {
 
 
       },
-
-
       onSelectEmoji(emoji) {
         this.newMessage += emoji.data;
         // Optional
         // this.toogleDialogEmoji();
+      },
+      gSearch(){
+   
+          
       }
   }
 }

@@ -61,7 +61,7 @@
     overflow-y: auto;
     padding: 10px;
     background-color: #fcfcfe;
-    height:800px;
+    height: calc(100vh - 147px); /*Ca sa dea exact minus header si new message*/ 
     /*Container Control
     outline: 1px solid red !important;
     outline-offset: -1px;*/
