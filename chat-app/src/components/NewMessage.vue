@@ -43,10 +43,10 @@ export default {
     methods: {
       addMessage(){
           //It should also open a modal and show your options
-          let script = this.newMessage.includes("/s") || this.newMessage.includes("/y") || this.newMessage.includes('/b') ; //Split this up in 3 for different functions :) yay
+          let script = this.newMessage.includes("/s") || this.newMessage.includes("/y") || this.newMessage.includes('/ss') ; //Split this up in 3 for different functions :) yay
           let empty = this.newMessage=="" || this.newMessage== null;
 
-          if (!script && !empty){
+          if (!script && !empty){ // If not script and not empty, push a new message
                 db.collection('messages').add({
                     content: this.newMessage,
                     name: this.name,
@@ -59,12 +59,16 @@ export default {
                 })
                 this.newMessage = null // clears input
                 this.feedback = null // clears error
-          } else if(script) {
+          } else if(script && !this.newMessage.includes("/y")) { // ? script && doesn't include /y
               let typed = this.newMessage.replace('/s',''); //Removes the /s from input for the Google search
-              window.open('http://google.com/search?q='+ typed )
+              window.open('https://google.com/search?q='+ typed )
               this.newMessage = ""
+          } else if (script && this.newMessage.includes("/y")){
+               let typed = this.newMessage.replace('/y','');
+               window.open('https:///youtube.com/results?search_query='+ typed )
           } else if (empty) {
               this.feedback = "You must enter a message in order to send one."
+              //And won't send because its doubled-up up
           } else {
               preventDefault();
           }
