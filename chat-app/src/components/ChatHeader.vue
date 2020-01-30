@@ -4,11 +4,11 @@
         <i @click="$router.go()" class="material-icons blue-text" style="vertical-align: -6px; cursor: pointer;">chevron_left</i>
         <i class="material-icons" style="vertical-align: -6px;">chat</i>{{room}}
     </div>
-        <span class="user-avatar" :style='{ backgroundImage: "url(" + "https://image.flaticon.com/icons/svg/1596/1596810.svg" + ")"}'>{{name}}</span>
+        <span data-target="modal1"  class="user-avatar modal-trigger" :style='{ backgroundImage: "url(" + "https://image.flaticon.com/icons/svg/1596/1596810.svg" + ")"}'></span>
 
     <div class="chat-header-options" >
 
-
+        <Modal :name="name"/>
 
       <span> <i class="material-icons">settings</i></span>
     </div>
@@ -16,15 +16,21 @@
 </template>
 
 <script>
+  import Modal from '@/components/Modal'
+
 export default {
     name: 'ChatHeader',
     props: ['name','room'],
+    components: {
+      Modal,
+    }
 }
 </script>
 
 
 <style>
   .user-avatar {
+    width:25px;
    /* width: 50px;
     height: 50px;
     margin-right: 10px;*/
@@ -35,6 +41,7 @@ export default {
     border-radius: 50%;
     text-align: center;
     color:white;
+    cursor: pointer;
   }
   .chat-header{
     display: flex;

@@ -8,11 +8,12 @@ import VueChatScroll from "vue-chat-scroll"
 Vue.use(VueChatScroll)
 
 Vue.config.productionTip = false
+/* Adding Modal from Materialize*/
 
 /* eslint-disable no-new */
 new Vue({
     el: '#app',
     router,
     components: { App },
-    template: '<App/>'
+    template: '<App/>',
 })
