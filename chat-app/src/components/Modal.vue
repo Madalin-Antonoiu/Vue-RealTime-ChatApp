@@ -14,8 +14,9 @@
       <div class="modal-footer">
         <span class="waves-effect waves-red btn-flat">Delete all messages</span>
         <span class="waves-effect waves-red btn-flat">Delete room messages</span>
-        <span @click.prevent="clearChat()"class="waves-effect waves-red btn-flat">Clear chat</span>
+        <span @click.prevent="clearChat()" class="waves-effect waves-red btn-flat">Clear chat</span>
         <span class="modal-close waves-effect waves-green btn-flat">Close</span>
+         <button class="button btn" @click="fullChatHistoryImage()"> Img </button>
       </div>
     </div>
 
@@ -23,6 +24,8 @@
 </template>
 
 <script>
+import domtoimage from 'dom-to-image-more';
+
   export default {
     name: "Modal",
     props: ['name', 'room'],
@@ -57,7 +60,29 @@
           while (myNode.firstChild) {
             myNode.removeChild(myNode.firstChild);
           }
-      }
+      },
+      fullChatHistoryImage(){
+        var node = document.getElementById('capture');
+        
+          domtoimage.toPng(node, { height: node.scrollTop = node.scrollHeight})
+            .then(function (dataUrl) {
+                var img = new Image();
+                img.src = dataUrl;
+                img.classList.add("historyImg");
+                document.body.appendChild(img);
+            })
+            .catch(function (error) {
+                console.error('oops, something went wrong!', error);
+            });
+          },
+      domigifyDownload(){
+        domtoimage.toJpeg(document.getElementById('capture'), { quality: 0.95 }).then(function (dataUrl) {
+                var link = document.createElement('a');
+                link.download = 'my-image-name.jpeg';
+                link.href = dataUrl;
+                link.click();
+          })
+      },
     }
   }
 </script>
@@ -68,5 +93,19 @@
   }
   .modal-overlay{
     opacity:0 !important;
+  }
+/* Support for 3 chat history imgs side by side */
+ .historyImg{ 
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 9999;
+    height: 100vh;
+  }
+   .historyImg:nth-of-type(2){
+    right:80px;
+  }
+     .historyImg:nth-of-type(3){
+    right:160px;
   }
 </style>

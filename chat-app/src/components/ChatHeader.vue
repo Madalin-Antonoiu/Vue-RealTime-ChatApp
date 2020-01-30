@@ -3,7 +3,7 @@
 
   <div class="chat-header">
     <div class="chat-header-title valign-wrapper">
-        <i @click="$router.go()" class="material-icons blue-text" style="vertical-align: -6px; cursor: pointer;">chevron_left</i>
+        <i @click="router.replace('/')" class="material-icons blue-text" style="vertical-align: -6px; cursor: pointer;">chevron_left</i>
       <span class="new badge room-badge" data-badge-caption="">Room: {{room}}</span>
     </div>
 

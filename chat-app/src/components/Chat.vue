@@ -5,7 +5,7 @@
     <ChatHeader :name="name" :room="room"  />
     <ChatMessages :name="name" /> <!-- No longer need to pass room-->
     <NewMessage :name="name" :room="room" />
-    <button class="button btn" @click="saveCanvas()"> Take SS </button>
+   
 
     <footer id="footer">
       <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
@@ -19,6 +19,7 @@
   import ChatHeader from '@/components/ChatHeader'
   import ChatMessages from '@/components/ChatMessages'
   import NewMessage from '@/components/NewMessage'
+  
 
   export default {
     name: 'Chat',
@@ -47,7 +48,7 @@
  
       },
 
-      },
+    },
 }
 
 </script>

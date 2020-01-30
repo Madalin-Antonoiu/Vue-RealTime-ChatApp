@@ -1,6 +1,6 @@
 <template>
 
-    <ul id="cm" class="chat-messages" v-chat-scroll>
+    <ul class="chat-messages" v-chat-scroll id="capture"> <!-- capture Must stay here for full chat record image -->
       <li  v-for="message in messages" :key="message.id" :class="{'message right-message': name === message.name, 'message left-message': name !== message.name}">
         <span class="message-avatar"
           :style='
