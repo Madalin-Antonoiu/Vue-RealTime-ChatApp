@@ -1,5 +1,5 @@
 <template>
-    <ul class="chat-messages" v-chat-scroll>
+    <ul id="cm" class="chat-messages" v-chat-scroll>
       <li  v-for="message in messages" :key="message.id" :class="{'message right-message': name === message.name, 'message left-message': name !== message.name}">
         <span class="message-avatar"
           :style='

@@ -44,7 +44,8 @@
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
     justify-content: space-between;
-    box-shadow: 0 15px 15px -5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.5); /*Rlly cool*/
+
   }
 
 

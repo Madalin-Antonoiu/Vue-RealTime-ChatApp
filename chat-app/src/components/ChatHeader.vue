@@ -1,18 +1,23 @@
 <template>
+
+
   <div class="chat-header">
-    <div class="chat-header-title">
+    <div class="chat-header-title valign-wrapper">
         <i @click="$router.go()" class="material-icons blue-text" style="vertical-align: -6px; cursor: pointer;">chevron_left</i>
-        <i class="material-icons" style="vertical-align: -6px;">chat</i>{{room}}
+      <span class="new badge room-badge" data-badge-caption="">Room: {{room}}</span>
     </div>
-        <span data-target="modal1"  class="user-avatar modal-trigger" :style='{ backgroundImage: "url(" + "https://image.flaticon.com/icons/svg/1596/1596810.svg" + ")"}'></span>
 
-    <div class="chat-header-options" >
 
-        <Modal :name="name"/>
+      <div class="right">
+          <Modal :name="name" :room="room"/>
+          <a class="btn-floating btn-small waves-effect waves-light blue modal-trigger" data-target="modal1"><i class="material-icons">settings</i></a>
 
-      <span> <i class="material-icons">settings</i></span>
-    </div>
+      </div>
+
+
   </div>
+
+
 </template>
 
 <script>
@@ -29,25 +34,13 @@ export default {
 
 
 <style>
-  .user-avatar {
-    width:25px;
-   /* width: 50px;
-    height: 50px;
-    margin-right: 10px;*/
-    background: #ddd;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    border-radius: 50%;
-    text-align: center;
-    color:white;
-    cursor: pointer;
-  }
+
   .chat-header{
+    z-index: 9999;
+    box-shadow: 0 5px 5px rgba(182, 182, 182, 0.75); /*Rlly cool*/
     display: flex;
     justify-content: space-between;
     padding: 10px;
-    border-bottom: var(--border);
     background: #eee;
     color: #666;
     width:100%;
@@ -55,4 +48,9 @@ export default {
     outline: 1px solid violet !important;
     outline-offset: -1px;*/
   }
+  .room-badge{
+    margin-left:0 !important;
+    user-select: none;
+  }
+
 </style>

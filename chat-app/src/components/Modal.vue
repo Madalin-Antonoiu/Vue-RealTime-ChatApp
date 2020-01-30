@@ -5,9 +5,8 @@
     <!-- Modal Structure -->
     <div id="modal1" class="modal">
       <div class="modal-content">
-        <h4>Details</h4>
-        <p>User: <span class="teal-text">{{name}}</span></p>
-        <p>Room: X , 20 msg</p>
+        <p><span class="teal-text">User</span>: {{name}}</p>
+        <p><span class=" indigo-text lighten-2">Room:</span> {{room}} , <span >20 msg</span></p>
         <p>Total messages: 120msg</p>
         <p>Other settings</p>
         <p>Rank: Rookie</p>
@@ -16,7 +15,7 @@
         <span class="modal-close waves-effect waves-green btn-flat">Close</span>
         <span class="waves-effect waves-red btn-flat">Delete all messages</span>
         <span class="waves-effect waves-red btn-flat">Delete room messages</span>
-        <span class="waves-effect waves-red btn-flat">Clear chat</span>
+        <span @click.prevent="clearChat()"class="waves-effect waves-red btn-flat">Clear chat</span>
       </div>
     </div>
 
@@ -26,7 +25,7 @@
 <script>
   export default {
     name: "Modal",
-    props: ['name'],
+    props: ['name', 'room'],
     /*Materialize Global Modal */
     data() {
       return {
@@ -51,7 +50,15 @@
             setTimeout(() => { this.modalInstance.close() }, this.seconds * 1000)
           }
         }
+    },
+    methods:{
+      clearChat(){
+          const myNode = document.getElementById("cm");
+          while (myNode.firstChild) {
+            myNode.removeChild(myNode.firstChild);
+          }
       }
+    }
   }
 </script>
 

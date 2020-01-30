@@ -1,11 +1,11 @@
 <template>
-  <div >
+  <div class="new-message-area">
 
     <form class="msger-inputarea" @submit.prevent="addMessage()">
 
      <button @click.prevent="toogleDialogEmoji">😃</button>
       <input type="text" class="msger-input" placeholder="Enter your message..."  autofocus autocomplete="off" v-model="newMessage">
-      <button type="submit" class="msger-send-btn">Send</button> <br>
+      <button type="submit" class="chat-send-btn">Send</button> <br>
 
     </form>
       <p class="red-text center-align" v-if="feedback"> {{ feedback }}</p>
@@ -80,6 +80,10 @@ export default {
 
 <style lang="css">
     /*Cpen*/
+.new-message-area{
+  z-index:99999;
+  box-shadow: 0px -4px 3px rgba(182, 182, 182, 0.75);
+}
 
  #EmojiPicker{
    padding: 10px; /*Mirroring the above component*/
@@ -128,17 +132,17 @@ button {
 }
 
 
-.msger-send-btn {
+.chat-send-btn {
   width:59px;
   height: 45px;
   margin-left: 10px !important;
-  background: rgb(0, 196, 65);
+  background:  #26a69a;
   color: #fff;
   font-weight: bold;
   cursor: pointer;
   transition: background 0.23s;
 }
-.msger-send-btn:hover {
+.chat-send-btn:hover {
   background: rgb(0, 180, 50);
 }
 
