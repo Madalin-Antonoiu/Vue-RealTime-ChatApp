@@ -71,6 +71,17 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+ .card{
+    max-width: 450px;
+    margin: 0 auto;
+  }
+
+  .card .card-content{
+    padding: 12px;
+
+  }
+
  .welcome {
     /*width: 100%;*/
     max-width: 400px;
