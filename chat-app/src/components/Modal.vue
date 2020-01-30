@@ -12,10 +12,10 @@
         <p>Rank: Rookie</p>
       </div>
       <div class="modal-footer">
-        <span class="modal-close waves-effect waves-green btn-flat">Close</span>
         <span class="waves-effect waves-red btn-flat">Delete all messages</span>
         <span class="waves-effect waves-red btn-flat">Delete room messages</span>
         <span @click.prevent="clearChat()"class="waves-effect waves-red btn-flat">Clear chat</span>
+        <span class="modal-close waves-effect waves-green btn-flat">Close</span>
       </div>
     </div>
 

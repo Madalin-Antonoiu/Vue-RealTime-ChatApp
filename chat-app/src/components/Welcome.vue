@@ -1,8 +1,9 @@
 <template>
   <div class="welcome container">
     <div class="card">
-      <div class="card-content center-align">
-        <h2 class="teal-text">Welcome</h2>
+      <div class="card-content center-align blurred-text">
+        <h2 class="teal-text text-lighten-2">ZapChat</h2>
+
           <form @submit.prevent="validateAndEnterChat">
 
         <div class="input-field">
@@ -21,7 +22,7 @@
 
 
 
-            <button class="btn teal">Enter Chat</button>
+            <button class="btn teal lighten-2">Enter Chat</button>
           </form>
 
       </div>
@@ -56,10 +57,6 @@ export default {
         } else {
           this.$router.push({ name: 'Chat', params: {name: this.name, room: this.room} }) // Get the data and
         }
-
-
-
-
     }
 
 
@@ -75,8 +72,17 @@ export default {
  .card{
     max-width: 450px;
     margin: 0 auto;
-  }
 
+    background-image: url(https://images.unsplash.com/photo-1531214159280-079b95d26139?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80);
+    background-repeat: no-repeat;
+    background-size: cover;
+
+  }
+  .blurred-text{
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0, 0.5); /* Black w/opacity/see-through */
+    z-index: 2;
+  }
   .card .card-content{
     padding: 12px;
 
@@ -85,8 +91,8 @@ export default {
  .welcome {
     /*width: 100%;*/
     max-width: 400px;
-    padding-top: 50px;
  }
+
  .welcome h2 {
   font-size: 3em;
   margin-bottom: 50px;
@@ -99,5 +105,11 @@ export default {
 }
 .welcome span{
   margin-bottom: 30px;
+}
+.material-icons{
+  color: white;
+}
+input {
+  color: white;
 }
 </style>
