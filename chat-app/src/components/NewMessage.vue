@@ -162,7 +162,7 @@ export default {
         let icon = document.getElementById('scriptIcon');
         let input = document.getElementById('submit')
 
-        if (this.newMessage.startsWith("/", 0)){ //main if
+        if (this.newMessage.startsWith("/", 0)){ //main if, Visual Changes [enters scripts range]
           console.log('Started with /')
 
             if (this.newMessage.startsWith("s", 1)){
@@ -172,8 +172,9 @@ export default {
               input.placeholder ="Search on Google..."
 
               this.newMessage =""
+              document.getElementById("goButton").textContent="Search";
 
-              console.log('Attach Google icon')
+              console.log('Attached Google icon')
 
             }
             else if (this.newMessage.startsWith("y", 1)) {
@@ -188,7 +189,7 @@ export default {
               document.getElementById("goButton").textContent="Search"
               document.getElementById("goButton").style.backgroundColor="red";
 
-              console.log('Attach Youtube icon')
+              console.log('Attached Youtube icon')
 
             }
             else if (this.newMessage.startsWith("/clear", 0)){ // /clear
@@ -201,28 +202,22 @@ export default {
               this.newMessage = ""
 
             }
-            else if ( (!this.newMessage.includes("s", 1) || !this.newMessage.includes("y", 1) ) && event.key == "Backspace") {
-              //If backspace is pressed at second position, remove icon
-              console.log('Remove Google/Youtube icons with Backspace ONLY at position 1')
-
-              //make a function out out of these
-                document.getElementById('scriptIcon').classList.add('displayNone')
-                document.getElementById('submit').style.paddingLeft="0px"; //Move cursor back on hide
-                document.getElementById('submit').placeholder="Enter your message..."
-            }
-            else {console.log('No s, no y fulfilled yet.')}   // Secondary if-else if
+            else {
+              console.log('No s, no y fulfilled yet.')
+            }   // Secondary if-else if
 
         } // Main if
 
-          else {  //Intram in locul in care se prelucreaza DATE
+          else {  // Main else, Logical Changes
 
-              console.log('Just visual, not starting with /, clear all icons, these are regular messages?')
+                console.log('Just visual, not scripts starting with /, clear all icons, these are regular messages?')
 
                  if ( this.newMessage === "" && event.key === "Backspace"){ // Backspace should reset only when string is empty
                   icon.classList.remove('googleIcon', 'youtubeIcon')
                   document.getElementById('submit').style.paddingLeft="0px"; //Move cursor back on hide
-                  document.getElementById('submit').placeholder="Enter your message..."
+                  input.placeholder="Enter your message..."
                   document.getElementById("goButton").style.backgroundColor="";
+                  document.getElementById("goButton").textContent="Send";
                  } //The order really matters, so it first gets to this one before gets to Enter alon ;)
                  else if (event.key === "Enter" && icon.classList.contains('googleIcon') ){ // Cauta pe Google = Enter && Icon Google + Icon not hidden
                     //Search Google
@@ -239,7 +234,6 @@ export default {
                       document.getElementById('submit').style.paddingLeft="0px"
 
                       document.getElementById("goButton").style.backgroundColor="";
-                      document.getElementById("goButton").textContent="Send";
                  }
                  else if (event.key === "Enter" && icon.classList.contains('youtubeIcon') ){ // Cauta pe Google = Enter && Icon Google + Icon not hidden
                     //Search Youtube
@@ -276,16 +270,11 @@ export default {
                   this.newMessage = "" // clears input
                   this.feedback = null // clears error
                  }
-
-
                  else {
                    console.log('V- no backspace yet...')
+                 }
 
-
-
-
-          } // Main else,
-          }
+          }// Main else,
       },//keymonitor
       toogleDialogEmoji() {
 
