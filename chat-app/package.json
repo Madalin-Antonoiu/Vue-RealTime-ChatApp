@@ -11,7 +11,6 @@
   },
   "dependencies": {
     "dom-to-image-more": "^2.8.0",
-    "express": "^4.17.1",
     "firebase": "^7.7.0",
     "moment": "^2.24.0",
     "v-emoji-picker": "^2.0.3",
