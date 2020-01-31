@@ -1,16 +1,23 @@
 <template>
   <div class="new-message-area">
- <p class="red-text center-align" v-if="feedback"> {{ feedback }}</p>
-    <form class="msger-inputarea" @submit.prevent="addMessage()">
 
-    <button  class="btn button">G</button>
+  <div class="utils">
+    <p id="emptySend" class="red-text center-align" v-if="feedback"> {{ feedback }}</p>
+    <button @click.prevent="toogleDialogEmoji">😃</button>
+  </div>
 
-     <button @click.prevent="toogleDialogEmoji">😃</button>
-      <input  type="text" class="msger-input" placeholder="Enter your message..."  autofocus autocomplete="off" v-model="newMessage">
+
+  <form class="msger-inputarea" @submit.prevent="addMessage">
+
+    <span id="scriptIcon" class="flatIcon valign-wrapper displayNone"></span>
+
+     <!-- @keyup is an absolute MUST, so the checks happen after value is taken into newMessage -->
+      <input  id ="submit" type="text" class="msger-input" placeholder="Enter your message..."  autofocus autocomplete="off" v-model="newMessage" @keyup="keymonitor">
+
       <button type="submit" class="chat-send-btn">Send</button> <br>
 
     </form>
-     
+
         <VEmojiPicker
           v-show="showDialog"
           labelSearch="Search"
@@ -19,7 +26,7 @@
         />
 
     </div>
-  
+
 </template>
 
 <script>
@@ -37,8 +44,11 @@ export default {
         return {
             newMessage: "",
             feedback: null,
-            showDialog: false
+            showDialog: false,
+            buffer: [],
+            gluglu: false,
         }
+
     },
     methods: {
       addMessage(){
@@ -60,7 +70,7 @@ export default {
                 this.newMessage = null // clears input
                 this.feedback = null // clears error
           } else if(script && !this.newMessage.includes("/y") && !this.newMessage.includes("/c")) { // ? script && doesn't include /y
-              let typed = this.newMessage.replace('/s',''); //Removes the /s from input for the Google search
+              let typed = this.newMessage.replace('/s',''); //Removes the /s from input for the Google searc
               window.open('https://google.com/search?q='+ typed )
               this.newMessage = ""
           } else if (script && this.newMessage.includes("/y") && !this.newMessage.includes("/s") && !this.newMessage.includes("/c")){
@@ -72,9 +82,11 @@ export default {
             const myNode = document.getElementById("capture");
             while (myNode.firstChild) {
              myNode.removeChild(myNode.firstChild);
-            } 
+            }
             this.newMessage = ""
           } else if (empty) {
+            preventDefault(); //turning off the error for now
+
              //And won't send because its doubled-up up
               this.feedback = "You must enter a message in order to send one."
           }  else {
@@ -96,15 +108,66 @@ export default {
         // Optional
         // this.toogleDialogEmoji();
       },
-      gSearch(){
-   
-          
-      }
+      keymonitor () {
+
+      //##### The script i love the most from all i have ever written (2020) #########
+
+
+      if (this.newMessage.startsWith("/", 0)){ //main if
+        console.log('Started with /')
+
+        //if my input string has s on second position
+          if (this.newMessage.startsWith("s", 1)){
+            //Show Google icon
+            document.getElementById('submit').style.paddingLeft="20px"; //Move cursor with padding left on icon show
+
+            document.getElementById('scriptIcon').style.backgroundImage = "url('https://image.flaticon.com/icons/svg/281/281764.svg')"
+            document.getElementById('scriptIcon').classList.remove('displayNone')
+            this.newmessage ="/s  "
+
+            console.log('Show Google icon')
+
+          } else if (this.newMessage.startsWith("y", 1)) {
+            //Show YT icon
+            document.getElementById('scriptIcon').style.backgroundImage = "url('https://image.flaticon.com/icons/svg/185/185983.svg')"
+            document.getElementById('scriptIcon').classList.remove('displayNone')
+
+            console.log('Show Youtube icon')
+
+          } else if ( (!this.newMessage.includes("s", 1) || !this.newMessage.includes("y", 1) ) && event.key == "Backspace") {
+            //If backspace is pressed at second position, remove icon
+            console.log('Remove Google/Youtube icons with Backspace ONLY at position 1')
+               document.getElementById('scriptIcon').classList.add('displayNone')
+               document.getElementById('submit').style.paddingLeft="0px"; //Move cursor back on hide
+          }
+
+          else {
+              console.log('No s, no y fulfilled yet.')
+          }
+
+
+
+
+
+        //main if
+        } else {
+            console.log('Not starting with /, clear all icons')
+
+          //Do nothing, didn't start with /
+
+        } //main else
+
+      },//keymonitor
+
+    }, //methods
   }
-}
 </script>
 
 <style lang="css">
+
+
+
+
     /*Cpen*/
 .new-message-area{
   z-index:99999;
@@ -142,7 +205,9 @@ button {
 }
 
 
-
+form {
+  position: relative;
+}
 
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: grey;
@@ -197,6 +262,25 @@ button {
         margin-left: 10px;
     }
 
+.displayNone{
+  display: none!important;
+}
 
+.utils button{
+  font-size: 14px;
+}
+.utils {
+  padding-left: 10px;
+}
+.flatIcon{
+  width: 18px;
+  height: 18px;
+  background-size: cover;
+  background-repeat: none;
+  position: absolute;
+  top: 25px;
+  left: 7px;
+
+}
 
 </style>
