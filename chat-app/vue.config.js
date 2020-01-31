@@ -1,8 +1,9 @@
 module.exports = {
-  pluginOptions: {
-    express: {
-      shouldServeApp: true,
-      serverDir: './srv'
-    }
-  }
+    pluginOptions: {
+        express: {
+            shouldServeApp: true,
+            serverDir: './srv',
+        }
+    },
+    runtimeCompiler: true
 }
