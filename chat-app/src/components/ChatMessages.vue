@@ -13,7 +13,29 @@
           <div class="message-info">
             <span v-if="name !== message.name" class="message-info-name">{{ message.name }}</span>
           </div>
-          <div class="message-text">{{ message.content }}   <span class="message-info-time">{{ message.timestamp}}</span></div>
+          <div class="message-text" 
+          :style='
+            [ message.embed ?
+              { maxWidth: "100%", width: "350px"} :
+              { maxWidth: "180px"}
+            ]'
+          
+          
+          >
+
+            <span v-if="message.embed">
+              <div class="video-container">
+                <iframe width="560" height="315" 
+                  :src=" 'https://www.youtube.com/embed/' + message.embed" 
+                  frameborder="0" 
+                  allowfullscreen>
+                </iframe>
+              </div>
+            </span>
+
+            {{ message.content }}   
+            
+            <span class="message-info-time">{{ message.timestamp}}</span></div>
 
         </div>
       </li>
@@ -46,7 +68,8 @@
               content: doc.data().content,
               timestamp: moment(doc.data().timestamp).fromNow(),
               room: doc.data().room,
-              currentUser: this.name
+              currentUser: this.name,
+              embed: doc.data().embed
             })
           }
         })
@@ -59,6 +82,21 @@
 
 <style lang="css" scoped>
 
+  .video-container {
+  position: relative;
+  padding-bottom: 56.25%;
+  padding-top: 30px; height: 0; overflow: hidden;
+  }
+  
+  .video-container iframe,
+  .video-container object,
+  .video-container embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  }
   /*.chat-messages*/
   .chat-messages {
     overflow-y: auto;

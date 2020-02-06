@@ -6,7 +6,9 @@
     <button @click.prevent="toogleDialogEmoji">😃</button>
   </div>
 
-
+  <div id="frameCont" style="display:none;" class="video-container"> </div>
+  <!-- <iframe id="frm1" width="560" height="315"  frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>-->
+  <!-- :src=newMessage -->
   <form class="msger-inputarea" @submit.prevent="generateInputEvent"> <!-- Retired functionality @submit.prevent="addMessage" -->
 
     <span id="scriptIcon" class="flatIcon valign-wrapper" style="display: none;"></span>
@@ -24,6 +26,8 @@
           style="{ width: 4px }"
           @select="onSelectEmoji"
         />
+
+
 
     </div>
 
@@ -47,6 +51,8 @@ export default {
             showDialog: false,
             buffer: [],
             gluglu: false,
+            videoId: "",
+            iframeMarkup: ""
         }
 
     },
@@ -192,6 +198,27 @@ export default {
               console.log('Attached Youtube icon')
 
             }
+            else if (this.newMessage.startsWith("l", 1)) { //will be removed eventually
+              //Show YT icon
+
+
+
+                document.getElementById('submit').style.paddingLeft="23px";
+                icon.classList.add('youtubeIcon')
+              
+                document.getElementById("frameCont").style.display="block";
+
+
+                this.newMessage =""
+                document.getElementById('submit').placeholder="Paste a Youtube link"
+                document.getElementById("goButton").textContent="Share It"
+                document.getElementById("goButton").style.backgroundColor="red";
+
+                console.log('Attached Youtube icon')
+
+                
+            
+            } 
             else if (this.newMessage.startsWith("/clear", 0)){ // /clear
 
               const myNode = document.getElementById("capture");
@@ -211,13 +238,42 @@ export default {
           else {  // Main else, Logical Changes
 
                 console.log('Just visual, not scripts starting with /, clear all icons, these are regular messages?')
+            
+            if (this.newMessage.includes("https://www.youtube.com/", 0)){
 
-                 if ( this.newMessage === "" && event.key === "Backspace"){ // Backspace should reset only when string is empty
+                let short = this.newMessage.substr(3);
+                this.videoId = this.getId(short);
+
+                this.iframeMarkup = '<iframe width="560" height="315" src="https://www.youtube.com/embed/' 
+                    + this.videoId + '" frameborder="0" allowfullscreen></iframe>';
+                  document.getElementById('frameCont').innerHTML = this.iframeMarkup ;
+                
+                     
+                //document.getElementById('submit').style.paddingLeft="23px";
+                //icon.classList.add('youtubeIcon')
+              
+                document.getElementById("frameCont").style.display="block";
+
+
+                this.newMessage =""
+                document.getElementById('submit').placeholder="Say something and share it"
+                document.getElementById("goButton").textContent="Share It"
+                document.getElementById("goButton").style.backgroundColor="red";
+
+                //console.log('Attached Youtube icon')
+
+
+
+                  //console.log(iframeMarkup);
+                }
+                 else if ( this.newMessage === "" && event.key === "Backspace"){ // Backspace should reset only when string is empty
                   icon.classList.remove('googleIcon', 'youtubeIcon')
                   document.getElementById('submit').style.paddingLeft="0px"; //Move cursor back on hide
                   input.placeholder="Enter your message..."
                   document.getElementById("goButton").style.backgroundColor="";
                   document.getElementById("goButton").textContent="Send";
+                  document.getElementById("frameCont").style.display="none";
+
                  } //The order really matters, so it first gets to this one before gets to Enter alon ;)
                  else if (event.key === "Enter" && icon.classList.contains('googleIcon') ){ // Cauta pe Google = Enter && Icon Google + Icon not hidden
                     //Search Google
@@ -259,7 +315,8 @@ export default {
                       content: this.newMessage,
                       name: this.name,
                       timestamp: Date.now(),
-                      room: this.room
+                      room: this.room,
+                      embed: this.videoId
                       //this.room
 
                   }).catch( err =>{
@@ -267,8 +324,16 @@ export default {
                   })
 
                   //Clears after message sent
+                  input.placeholder="Enter your message..."
+                  document.getElementById("goButton").style.backgroundColor="";
+                  document.getElementById("goButton").textContent="Send";
+                  document.getElementById("frameCont").style.display="none";
+
                   this.newMessage = "" // clears input
                   this.feedback = null // clears error
+                  
+                  document.getElementById('frameCont').innerHTML = ""; //clears the iFrame
+
                  }
                  else {
                    console.log('V- no backspace yet...')
@@ -296,6 +361,14 @@ export default {
         ev.initEvent('onkeyup');
         ev.which = "Enter"
         input.dispatchEvent(ev);
+      },
+      getId(url) {
+        const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+        const match = url.match(regExp);
+
+        return (match && match[2].length === 11)
+          ? match[2]
+          : null;
       }
 
 
